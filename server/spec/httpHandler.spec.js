@@ -43,9 +43,14 @@ describe('server responses', () => {
     });
   });
 
-  xit('should respond with 200 to a GET request for a present background image', (done) => {
-    // write your test here
-    done();
+  it('should respond with 200 to a GET request for a present background image', (done) => {
+    httpHandler.backgroundImageFile = path.join('.', 'spec', 'water-sm.jpg');
+    let { req, res } = server.mock('/', 'GET', httpHandler.backgroundImageFile);
+    httpHandler.router(req, res, () => {
+      expect(res._responseCode).to.equal(200);
+      expect(res._ended).to.equal(true);
+      done();
+    });
   });
 
   var postTestFile = path.join('.', 'spec', 'water-lg.jpg');
