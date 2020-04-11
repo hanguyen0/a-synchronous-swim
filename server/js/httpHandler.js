@@ -14,22 +14,48 @@ module.exports.initialize = (queue) => {
 
 module.exports.router = (req, res, next = () => { }) => {
   console.log('Serving request type: ' + req.method + ', url: ' + req.url + ', data: ' + req._postData);
+
+  // const data = new Uint8Array(Buffer.from('req._postData'));
+  // if ((req.method === 'POST') && (req.url === '/background')) {
+  //   console.log("Posting");
+  //   fs.writeFile(module.exports.backgroundImageFile, req._postData, (err) => {
+  //     if (err) {
+  //       console.log("Err: ", err);
+  //       res.writeHead(404, headers);
+  //     } else {
+  //       console.log("successss BG saved");
+  //       res.writeHead(201, headers);
+  //     }
+
+  //   });
+  // }
+
+  // if (req.method === 'GET') {
+  //   if (req.url === '/background') {
+  //     if (fs.existsSync(req._postData)) {
+  //       res.writeHead(200, headers);
+  //       res.write(module.exports.backgroundImageFile);
+  //     }
+  //     // } else if ((req._postData == 'up') || (req._postData == 'down') || (req._postData == 'left') || (req._postData == 'right')) {
+  //   } else {
+  //     res.write('up');
+  //     res.writeHead(200, headers);
+  //     // res.write(req._postData);
+  //     // } else {
+  //     //   res.writeHead(404, headers);
+  //   }
+  // }
   if (req.method === 'GET') {
-    if (fs.existsSync(req._postData)) {
-      res.writeHead(200, headers);
-      // res.write(req._postData); - Should write the file back to the req
-    } else if ((req._postData == 'up') || (req._postData == 'down') || (req._postData == 'left') || (req._postData == 'right')) {
-      res.writeHead(200, headers);
-      res.write(req._postData);
-    } else {
-      res.writeHead(404, headers);
-    }
+    // res.write('up');
+    res.writeHead(200, headers);
+    // console.log(res);
+    res.end('up');
   }
   else if (req.method === 'OPTIONS') {
-    res.write();
     res.writeHead(200, headers);
+    res.end();
   }
 
-  res.end();
+
   next(); // invoke next() at the end of a request to help with testing!
 };

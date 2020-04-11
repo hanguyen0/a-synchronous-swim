@@ -6,6 +6,29 @@
   // TODO: build the swim command fetcher here
   //
 
+  let updateFromServer = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        console.log('ajax Ran!: Successs');
+        console.log('data: ', data);
+        SwimTeam.move(data);
+      },
+      error: (err) => {
+        console.log('ajax Ran!: Fail');
+        console.log(err);
+      }
+    });
+  }
+
+  updateFromServer();
+
+
+
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
   // Note: remember to fix the URL below.
