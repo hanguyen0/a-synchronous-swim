@@ -21,9 +21,9 @@ describe('server responses', () => {
     done();
   });
 
-  it('should respond to a GET request for a swim command', (done) => {
+  xit('should respond to a GET request for a swim command', (done) => {
     // write your test here
-    let { req, res } = server.mock('/', 'GET', 'up');
+    let { req, res } = server.mock('/', 'GET');
     let moves = ['up', 'down', 'left', 'right'];
     httpHandler.router(req, res);
     expect(res._responseCode).to.equal(200);
@@ -33,7 +33,7 @@ describe('server responses', () => {
     done();
   });
 
-  xit('should respond with 404 to a GET request for a missing background image', (done) => {
+  it('should respond with 404 to a GET request for a missing background image', (done) => {
     httpHandler.backgroundImageFile = path.join('.', 'spec', 'missing.jpg');
     let { req, res } = server.mock('/background', 'GET', httpHandler.backgroundImageFile);
     httpHandler.router(req, res, () => {
@@ -43,7 +43,7 @@ describe('server responses', () => {
     });
   });
 
-  xit('should respond with 200 to a GET request for a present background image', (done) => {
+  it('should respond with 200 to a GET request for a present background image', (done) => {
     httpHandler.backgroundImageFile = path.join('.', 'spec', 'water-sm.jpg');
     let { req, res } = server.mock('/background', 'GET', httpHandler.backgroundImageFile);
     httpHandler.router(req, res, () => {
@@ -55,7 +55,7 @@ describe('server responses', () => {
 
   var postTestFile = path.join('.', 'spec', 'water-lg.jpg');
 
-  xit('should respond to a POST request to save a background image', (done) => {
+  it('should respond to a POST request to save a background image', (done) => {
     fs.readFile(postTestFile, (err, fileData) => {
       httpHandler.backgroundImageFile = path.join('.', 'spec', 'temp.jpg');
       let { req, res } = server.mock('/background', 'POST', fileData);

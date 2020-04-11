@@ -6,6 +6,8 @@
   // TODO: build the swim command fetcher here
   //
 
+  // Check Server For Commands
+
   let updateFromServer = () => {
     $.ajax({
       type: 'GET',
@@ -34,10 +36,13 @@
   const ajaxFileUplaod = (file) => {
     var formData = new FormData();
     formData.append('file', file);
+
+    console.log(formData);
+
     $.ajax({
       type: 'POST',
       data: formData,
-      url: serverUrl,
+      url: serverUrl + '/background',
       cache: false,
       contentType: false,
       processData: false,
