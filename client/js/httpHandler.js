@@ -10,23 +10,20 @@
     $.ajax({
       type: 'GET',
       url: serverUrl,
-      cache: false,
-      contentType: false,
-      processData: false,
       success: (data) => {
-        console.log('ajax Ran!: Successs');
-        console.log('data: ', data);
         SwimTeam.move(data);
       },
       error: (err) => {
-        console.log('ajax Ran!: Fail');
         console.log(err);
       }
     });
+
+    setTimeout(() => {
+      updateFromServer();
+    }, 1000);
   }
 
   updateFromServer();
-
 
 
   /////////////////////////////////////////////////////////////////////

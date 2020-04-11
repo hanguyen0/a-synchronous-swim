@@ -45,12 +45,14 @@ module.exports.router = (req, res, next = () => { }) => {
   //     //   res.writeHead(404, headers);
   //   }
   // }
+
   if (req.method === 'GET') {
-    // res.write('up');
+    // res.write(messageQueue.toString());
     res.writeHead(200, headers);
-    // console.log(res);
-    res.end('up');
+    res.end(messageQueue);
+    messageQueue = null;
   }
+
   else if (req.method === 'OPTIONS') {
     res.writeHead(200, headers);
     res.end();
