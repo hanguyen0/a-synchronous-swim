@@ -13,11 +13,11 @@ module.exports.initialize = (queue) => {
 };
 
 module.exports.router = (req, res, next = () => { }) => {
-  console.log('Serving request type ' + req.method + ' for url ' + req.url);
-  console.log('req._postData: ', req._postData)
+  console.log('Serving request type: ' + req.method + ', url: ' + req.url + ', data: ' + req._postData);
   if (req.method === 'GET') {
     if (fs.existsSync(req._postData)) {
       res.writeHead(200, headers);
+      // res.write(req._postData); - Should write the file back to the req
     } else if ((req._postData == 'up') || (req._postData == 'down') || (req._postData == 'left') || (req._postData == 'right')) {
       res.writeHead(200, headers);
       res.write(req._postData);
