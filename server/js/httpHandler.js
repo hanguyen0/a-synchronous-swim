@@ -14,12 +14,22 @@ module.exports.initialize = (queue) => {
 
 module.exports.router = (req, res, next = () => { }) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
-  res.writeHead(200, headers);
+  console.log('req._postData: ', req._postData)
   if (req.method === 'GET') {
-    res.write('up');
-  } else {
-    res.write();
+    if (fs.existsSync(req._postData)) {
+      res.writeHead(200, headers);
+    } else if ((req._postData == 'up') || (req._postData == 'down') || (req._postData == 'left') || (req._postData == 'right')) {
+      res.writeHead(200, headers);
+      res.write(req._postData);
+    } else {
+      res.writeHead(404, headers);
+    }
   }
+  else if (req.method === 'OPTIONS') {
+    res.write();
+    res.writeHead(200, headers);
+  }
+
   res.end();
   next(); // invoke next() at the end of a request to help with testing!
 };
